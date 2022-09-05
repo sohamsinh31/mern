@@ -1,13 +1,49 @@
 const express = require("express");
-const app = express();
+const app2 = express();
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const mysql = require("mysql2");
 require('dotenv').config()
+const { createServer } = require('http')
+const { parse } = require('url')
+const next = require('next')
 
-app.use(cors())
-app.use(express.json())
-app.use(bodyParser.urlencoded({extended:true}))
+const dev = process.env.NODE_ENV !== 'production'
+const hostname = 'localhost'
+const port = 3000
+
+const app = next({ dev, hostname, port })
+const handle = app.getRequestHandler()
+
+app.prepare().then(() => {
+    createServer(async (req, res) => {
+      try {
+        // Be sure to pass `true` as the second argument to `url.parse`.
+        // This tells it to parse the query portion of the URL.
+        const parsedUrl = parse(req.url, true)
+        const { pathname, query } = parsedUrl
+  
+        if (pathname === '/a') {
+          await app.render(req, res, '/a', query)
+        } else if (pathname === '/b') {
+          await app.render(req, res, '/b', query)
+        } else {
+          await handle(req, res, parsedUrl)
+        }
+      } catch (err) {
+        console.error('Error occurred handling', req.url, err)
+        res.statusCode = 500
+        res.end('internal server error')
+      }
+    }).listen(port, (err) => {
+      if (err) throw err
+      console.log(`> Ready on http://${hostname}:${port}`)
+    })
+  })
+
+app2.use(cors())
+app2.use(express.json())
+app2.use(bodyParser.urlencoded({extended:true}))
 
 const db = mysql.createPool({
     host:String(process.env.NEXT_PUBLIC_HOST),
@@ -17,15 +53,24 @@ const db = mysql.createPool({
     port:"3306"
 })
 
-app.listen(5000,()=>{
+app2.listen(5000,()=>{
     console.log("server is running")
 })
 
-app.get("/",(req,res)=>{
+app2.get("/",(req,res)=>{
     const q = "SELECT * FROM contects";
     db.query(q,(e,r)=>{
        console.log(e);
         console.log(r);
     })
     res.send("Hello world!");
+})
+
+app2.post("/api/gett",(req,res)=>{
+    // const q = "SELECT * FROM contects";
+    // db.query(q,(e,r)=>{
+    //    console.log(e);
+    //     console.log(r);
+    // })
+    res.send(req.body.first);
 })

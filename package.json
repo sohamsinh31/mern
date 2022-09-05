@@ -4,8 +4,9 @@
   "private": true,
   "scripts": {
     "server": "nodemon server.js",
+    "nnn":"next dev",
     "dev2": "start next dev && start npm run server",
-    "dev": "npm-run-all -p -r server dev2",
+    "dev": "nodemon server.js",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
