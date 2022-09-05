@@ -45,24 +45,24 @@ app2.use(cors())
 app2.use(express.json())
 app2.use(bodyParser.urlencoded({extended:true}))
 
-const db = mysql.createPool({
-    host:String(process.env.NEXT_PUBLIC_HOST),
-    user:String(process.env.NEXT_PUBLIC_USER),
-    password:String(process.env.NEXT_PUBLIC_PASSWORD),
-    database:String(process.env.NEXT_PUBLIC_DATABASE),
-    port:"3306"
-})
+// const db = mysql.createPool({
+//     host:String(process.env.NEXT_PUBLIC_HOST),
+//     user:String(process.env.NEXT_PUBLIC_USER),
+//     password:String(process.env.NEXT_PUBLIC_PASSWORD),
+//     database:String(process.env.NEXT_PUBLIC_DATABASE),
+//     port:"3306"
+// })
 
-app2.listen(5000,()=>{
+app2.listen(process.env.PORT,()=>{
     console.log("server is running")
 })
 
 app2.get("/",(req,res)=>{
-    const q = "SELECT * FROM contects";
-    db.query(q,(e,r)=>{
-       console.log(e);
-        console.log(r);
-    })
+    // const q = "SELECT * FROM contects";
+    // db.query(q,(e,r)=>{
+    //    console.log(e);
+    //     console.log(r);
+    // })
     res.send("Hello world!");
 })
 
