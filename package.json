@@ -5,7 +5,7 @@
   "scripts": {
     "server": "nodemon server.js",
     "dev2": "start next dev && start npm run server",
-    "dev": "npm-run-all -p -r server dev",
+    "dev": "npm-run-all -p -r server dev2",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
