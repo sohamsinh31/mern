@@ -8,7 +8,7 @@ import {useState} from 'react'
 export default function Home(req,res) {
   const [first, setfirst] = useState('')
 function sendData(){
-  fetch('/api/hello', {
+  fetch('/api/test/add', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
