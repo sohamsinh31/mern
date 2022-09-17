@@ -7,14 +7,20 @@ import {useState} from 'react'
 
 export default function Home(req,res) {
   const [first, setfirst] = useState('')
-function sendData(){
+  const createTest = async ()=>{
+  const random = Math.floor(Math.random()*1000)
   fetch('/api/test/add', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
-    body: JSON.stringify({first:first}),
-  })
+    body: JSON.stringify({
+      name:`Test ${random}`,
+      email:`test${random}@gmail.com`
+    }),
+  });
+  const data = await res
+  console.log(data.json())
 }
   return (
     <div className={styles.container}>
@@ -23,7 +29,7 @@ function sendData(){
       <input type="text" id="first" name="first" onChange={(e)=>setfirst(e.target.value)} />
       <label htmlFor="last">Last name:</label>
       <input type="text" id="last" name="last" />
-      <button onClick={sendData}>Submit</button>
+      <button onClick={createTest}>Submit</button>
     {/* </form> */}
     </div>
   )
