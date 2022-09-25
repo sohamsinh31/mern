@@ -2,10 +2,21 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import {useState} from 'react'
+import PizzaCard from './components/PizzaCard'
+import Navigation from './components/Navigation'
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+import Header from './components/Header'
+import {green,orange} from '@mui/material/colors'
 
 // console.log(process.env.NEXT_PUBLIC_HOST)
 
 export default function Home(req,res) {
+  const darkTheme = createTheme({
+    palette: {
+      mode: 'dark',
+    },
+  })
   const [first, setfirst] = useState('')
   const createTest = async ()=>{
   const random = Math.floor(Math.random()*1000)
@@ -23,14 +34,13 @@ export default function Home(req,res) {
   console.log(data.json())
 }
   return (
-    <div className={styles.container}>
-    {/* <form action="api/gett" method="post"> */}
-      <label htmlFor="first">First name:</label>
-      <input type="text" id="first" name="first" onChange={(e)=>setfirst(e.target.value)} />
-      <label htmlFor="last">Last name:</label>
-      <input type="text" id="last" name="last" />
-      <button onClick={createTest}>Submit</button>
-    {/* </form> */}
-    </div>
+    <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
+      <Header/>
+      <PizzaCard/>
+      <PizzaCard/>
+      <PizzaCard/>
+      <Navigation val={0}/>
+      </ThemeProvider>
   )
 }
