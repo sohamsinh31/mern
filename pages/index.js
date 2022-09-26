@@ -21,7 +21,7 @@ export default  function Home(req,res) {
     },
   })
   const [first, setfirst] = useState('')
-  const [load, setload] = useState(true)
+  const [load, setload] = useState(false)
   async function getUser() {
     try {
       const response = await axios.get('/api/products');
