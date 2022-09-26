@@ -15,6 +15,9 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
+import { Avatar } from '@mui/material';
+import styles from '../../styles/Home.module.css'
+
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -155,19 +158,10 @@ export default function Header() {
   );
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+    <Box sx={{ flexGrow: 1,backgroundColor:'transpernt' }}>
+      <AppBar className={styles.header} position="fixed">
         <Toolbar>
-          <IconButton
-            size="large"
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={()=>console.log("hi")}
-            sx={{ mr: 2 }}
-          >
-            <MenuIcon />
-          </IconButton>
+            <Avatar sx={{ mr: 2 }} src='/static/logo1.png'/>
           <Typography
             variant="h6"
             noWrap

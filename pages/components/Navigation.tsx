@@ -13,20 +13,21 @@ import ListItemAvatar from '@mui/material/ListItemAvatar';
 import ListItemText from '@mui/material/ListItemText';
 import Avatar from '@mui/material/Avatar';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
+import LocationCityIcon from '@mui/icons-material/LocationCity';
+import styles from '../../styles/Home.module.css'
 
 const Navigation = ({val}) => {
     const [value, setValue] = React.useState(val);
   return (
-      <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
+      <Paper  sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
         <BottomNavigation
           showLabels
           value={value}
           onChange={(event, newValue) => {
             setValue(newValue);
-            console.log(newValue)
           }}
         >
-          <BottomNavigationAction style={{color:'aqua'}} label="Recents" icon={<RestoreIcon />} />
+          <BottomNavigationAction label="Hotels" icon={<LocationCityIcon />} />
           <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
           <BottomNavigationAction label="Orders" icon={<LocalMallIcon />} />
         </BottomNavigation>

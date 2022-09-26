@@ -8,39 +8,48 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
 import Header from './components/Header'
 import {green,orange} from '@mui/material/colors'
+import Skeleton from '@mui/material/Skeleton';
+import axios from 'axios'
+
 
 // console.log(process.env.NEXT_PUBLIC_HOST)
 
-export default function Home(req,res) {
+export default  function Home(req,res) {
   const darkTheme = createTheme({
     palette: {
       mode: 'dark',
     },
   })
   const [first, setfirst] = useState('')
-  const createTest = async ()=>{
-  const random = Math.floor(Math.random()*1000)
-  fetch('/api/test/add', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({
-      name:`Test ${random}`,
-      email:`test${random}@gmail.com`
-    }),
-  });
-  const data = await res
-  console.log(data.json())
-}
+  const [load, setload] = useState(true)
+  async function getUser() {
+    try {
+      const response = await axios.get('/api/products');
+      console.log(response.data[0].prices[0]);
+      setload(false);
+    } catch (error) {
+      console.error(error);
+    }
+  }
+  getUser()
   return (
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <Header/>
+      <div style={{marginBottom:'56px',marginTop:'56px'}}>
+        {load?(
+        <Skeleton sx={{ height: 190 }} animation="wave" variant="rectangular" />      
+):(
+  <div>
       <PizzaCard/>
       <PizzaCard/>
       <PizzaCard/>
+      </div>
+    
+)}
+</div>
       <Navigation val={0}/>
       </ThemeProvider>
   )
 }
+
