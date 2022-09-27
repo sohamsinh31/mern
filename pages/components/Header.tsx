@@ -15,7 +15,7 @@ import AccountCircle from '@mui/icons-material/AccountCircle';
 import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
-import { Avatar } from '@mui/material';
+import { Avatar,Paper } from '@mui/material';
 import styles from '../../styles/Home.module.css'
 
 
@@ -33,6 +33,9 @@ const Search = styled('div')(({ theme }) => ({
     marginLeft: theme.spacing(3),
     width: 'auto',
   },
+}));
+const Item = styled(Paper)(({ theme }) => ({
+  backgroundColor: 'transparent',
 }));
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({

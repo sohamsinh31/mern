@@ -114,6 +114,7 @@
   border-width: 0px 0px thin;
   background: rgba(31, 39, 47, 0.5);
   color: rgb(158, 158, 158);
+  -webkit-backdrop-filter: blur(20px);
 }
 
 @media (max-width: 600px) {
