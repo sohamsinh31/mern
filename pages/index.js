@@ -2,11 +2,11 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 import {useState} from 'react'
-import PizzaCard from './components/PizzaCard'
-import Navigation from './components/Navigation'
+import PizzaCard from '../components/PizzaCard'
+import Navigation from '../components/Navigation'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import Header from './components/Header'
+import Header from '../components/Header'
 import {green,orange} from '@mui/material/colors'
 import Skeleton from '@mui/material/Skeleton';
 import axios from 'axios'

@@ -14,11 +14,18 @@ import ListItemText from '@mui/material/ListItemText';
 import Avatar from '@mui/material/Avatar';
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
-import styles from '../../styles/Home.module.css'
+import styles from '../styles/Home.module.css'
+import Link from 'next/link'
 
 
 const Navigation = ({val}) => {
     const [value, setValue] = React.useState(val);
+    const linking = (e) => {
+      let a = document.createElement("a")
+      a.setAttribute("href",e)
+      a.setAttribute("class","clickme")
+      a.click()
+    }
 
   return (
       <Paper  sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
@@ -29,9 +36,9 @@ const Navigation = ({val}) => {
             setValue(newValue);
           }}
         >
-          <BottomNavigationAction label="Hotels" icon={<LocationCityIcon />} />
-          <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-          <BottomNavigationAction label="Orders" icon={<LocalMallIcon />} />
+         <BottomNavigationAction onClick={()=>linking('/')} label="Hotels" icon={<LocationCityIcon />} />
+          <BottomNavigationAction onClick={()=>linking('/favorites')} label="Favorites" icon={<FavoriteIcon />} />
+          <BottomNavigationAction onClick={()=>linking('/orders')}  label="Orders" icon={<LocalMallIcon />} />
         </BottomNavigation>
       </Paper>
   )

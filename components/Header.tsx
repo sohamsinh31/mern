@@ -16,7 +16,7 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { Avatar,Paper } from '@mui/material';
-import styles from '../../styles/Home.module.css'
+import styles from '../styles/Home.module.css'
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -34,9 +34,7 @@ const Search = styled('div')(({ theme }) => ({
     width: 'auto',
   },
 }));
-const Item = styled(Paper)(({ theme }) => ({
-  backgroundColor: 'transparent',
-}));
+
 
 const SearchIconWrapper = styled('div')(({ theme }) => ({
   padding: theme.spacing(0, 2),

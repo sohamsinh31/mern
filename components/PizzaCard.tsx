@@ -88,7 +88,7 @@ const handleOpen = () => setOpen(true);
 const handleClose = () => setOpen(false);
   return (
     <div>
-    <Card sx={{ maxWidth: 420}}>
+    <Card sx={{ maxWidth: 420,borderRadius:'16px',margin:'7px'}}>
       <CardMedia
         component="img"
         alt="green iguana"

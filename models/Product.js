@@ -6,6 +6,11 @@ const ProocuctSchema = new mongoose.Schema({
         reqired:true,
         maxlength:60,
     },
+    hotelid:{
+        type:String,
+        reqired:true,
+        maxlength:60,
+    },
     desc:{
         type:String,
         reqired:true,
