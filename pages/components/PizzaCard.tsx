@@ -54,8 +54,11 @@ import {
   WhatsappIcon,
   WorkplaceIcon
 } from "react-share";
+import { Dialog, DialogContent, Theme } from "@mui/material";
+
 
 export default function PizzaCard() {
+
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
     ...theme.typography.body2,

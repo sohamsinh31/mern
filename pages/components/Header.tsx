@@ -160,7 +160,7 @@ export default function Header() {
   return (
     <Box sx={{ flexGrow: 1,backgroundColor:'transpernt' }}>
       <AppBar className={styles.header} position="fixed">
-        <Toolbar>
+        <Toolbar className={styles.header}>
             <Avatar sx={{ mr: 2 }} src='/static/logo1.png'/>
           <Typography
             variant="h6"

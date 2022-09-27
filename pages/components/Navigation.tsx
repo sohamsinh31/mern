@@ -16,8 +16,10 @@ import LocalMallIcon from '@mui/icons-material/LocalMall';
 import LocationCityIcon from '@mui/icons-material/LocationCity';
 import styles from '../../styles/Home.module.css'
 
+
 const Navigation = ({val}) => {
     const [value, setValue] = React.useState(val);
+
   return (
       <Paper  sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
         <BottomNavigation
