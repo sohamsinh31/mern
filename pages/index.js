@@ -10,6 +10,7 @@ import Header from '../components/Header'
 import {green,orange} from '@mui/material/colors'
 import Skeleton from '@mui/material/Skeleton';
 import axios from 'axios'
+import Hotel from '../components/Hotel'
 
 
 // console.log(process.env.NEXT_PUBLIC_HOST)
@@ -21,11 +22,13 @@ export default  function Home(req,res) {
     },
   })
   const [first, setfirst] = useState('')
+  const [data, setdata] = useState([])
   const [load, setload] = useState(false)
   async function getUser() {
     try {
-      const response = await axios.get('/api/products');
-      console.log(response.data[0].prices[0]);
+      const response = await axios.get('/api/hotels');
+      //console.log(response.data);
+      setdata(response.data)
       setload(false);
     } catch (error) {
       console.error(error);
@@ -36,14 +39,15 @@ export default  function Home(req,res) {
     <ThemeProvider theme={darkTheme}>
       <CssBaseline />
       <Header/>
-      <div style={{marginBottom:'56px',marginTop:'56px'}}>
+      <div style={{marginBottom:'56px',marginTop:'61px'}}>
         {load?(
         <Skeleton sx={{ height: 190 }} animation="wave" variant="rectangular" />      
 ):(
   <div>
-      <PizzaCard/>
-      <PizzaCard/>
-      <PizzaCard/>
+    {data.length>0?data.map(val=>(
+      <Hotel imageurl={val.imageurl} title={val.title} id={val._id}/>
+    )):(<></>)}
+    
       </div>
     
 )}

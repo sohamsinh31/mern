@@ -5,23 +5,28 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { CardActionArea } from '@mui/material';
 
-export default function ActionAreaCard() {
+export default function Hotel({imageurl,title,id}) {
+  const linking = (e) => {
+    let a = document.createElement("a")
+    a.setAttribute("href",e)
+    a.setAttribute("class","clickme")
+    a.click()
+  }
   return (
-    <Card sx={{ maxWidth: 345 }}>
+    <Card onClick={()=>linking(`${id}`)} sx={{ maxWidth: 420,margin:'7px',borderRadius:'16px' }}>
       <CardActionArea>
         <CardMedia
           component="img"
           height="140"
-          image="/static/images/cards/contemplative-reptile.jpg"
+          image={imageurl}
           alt="green iguana"
         />
         <CardContent>
           <Typography gutterBottom variant="h5" component="div">
-            Lizard
+            {title}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
+           Find out best foods in your favourite hotel {title}.
           </Typography>
         </CardContent>
       </CardActionArea>

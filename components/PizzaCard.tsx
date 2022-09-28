@@ -55,9 +55,19 @@ import {
   WorkplaceIcon
 } from "react-share";
 import { Dialog, DialogContent, Theme } from "@mui/material";
+import Collapse from '@mui/material/Collapse';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import IconButton, { IconButtonProps } from '@mui/material/IconButton';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 
-export default function PizzaCard() {
+interface ExpandMoreProps extends IconButtonProps {
+  expand: boolean;
+}
+export default function PizzaCard({title,desc,imageurl,prices,extra},props) {
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -82,13 +92,41 @@ export default function PizzaCard() {
     height:'188px',
     p: 4,
   };
+
+
   const [like, setlike] = React.useState(true)
   const [open, setOpen] = React.useState(false);
 const handleOpen = () => setOpen(true);
 const handleClose = () => setOpen(false);
+const [expanded, setExpanded] = React.useState(false);
+const [age, setAge] = React.useState('');
+
+//console.log(extra)
+
+
+const ExpandMore = styled((props: ExpandMoreProps) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? 'rotate(0deg)' : 'rotate(180deg)',
+  marginLeft: 'auto',
+  transition: theme.transitions.create('transform', {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
+
+
+const handleExpandClick = () => {
+  setExpanded(!expanded);
+};
+
+const handleChange = (event: SelectChangeEvent) => {
+  setAge(event.target.value as string);
+};
+
   return (
     <div>
-    <Card sx={{ maxWidth: 420,borderRadius:'16px',margin:'7px'}}>
+    <Card sx={{maxWidth: 420,borderRadius:'16px',margin:'7px'}}>
       <CardMedia
         component="img"
         alt="green iguana"
@@ -97,17 +135,48 @@ const handleClose = () => setOpen(false);
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
-          Pizza
+          {title}
         </Typography>
         <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
+          {desc}
         </Typography>
+        
       </CardContent>
       <CardActions>
         {like?(<FavoriteIcon style={{color:'red'}}/>):(<FavoriteBorderIcon/>)}
         <ShareIcon onClick={handleOpen}/>
+        <ExpandMore
+          expand={expanded}
+          onClick={handleExpandClick}
+          aria-expanded={expanded}
+          aria-label="show more"
+        >
+          <ExpandMoreIcon />
+        </ExpandMore>
       </CardActions>
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
+        <CardContent>
+        <Box sx={{ minWidth: 120 }}>
+      <FormControl fullWidth>
+        <InputLabel id="demo-simple-select-label">Options</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={age}
+          label="Options"
+          onChange={handleChange}
+        >
+        {
+          
+        extra.map(val=>(
+          <MenuItem value={val.price}>{val.text}={val.price}₹</MenuItem>
+    ))
+  }
+          </Select>
+      </FormControl>
+    </Box>
+        </CardContent>
+      </Collapse>
     </Card>
     <Modal
                 open={open}
