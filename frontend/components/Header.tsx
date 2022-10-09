@@ -16,7 +16,8 @@ import MailIcon from '@mui/icons-material/Mail';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { Avatar,Paper } from '@mui/material';
-import styles from '../styles/Home.module.css'
+import styles from '../styles/Home.module.css';
+import {signIn,signOut,useSession,getSession} from 'next-auth/react'
 
 
 const Search = styled('div')(({ theme }) => ({
@@ -61,6 +62,10 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function Header() {
+
+  const {data : session,status } = useSession();
+
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
 
@@ -151,9 +156,9 @@ export default function Header() {
           aria-haspopup="true"
           color="inherit"
         >
-          <AccountCircle />
+          <Avatar src={session?.user?.image} />
         </IconButton>
-        <p>Profile</p>
+        <p>{session?.user?.name}</p>
       </MenuItem>
     </Menu>
   );
@@ -169,7 +174,7 @@ export default function Header() {
             component="div"
             sx={{ display: { xs: 'none', sm: 'block' } }}
           >
-            MUI
+            VFood
           </Typography>
           <Search>
             <SearchIconWrapper>
@@ -205,7 +210,7 @@ export default function Header() {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-              <AccountCircle />
+            <Avatar src={session?.user?.image} />
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>

@@ -20,6 +20,7 @@ import Link from 'next/link'
 
 const Navigation = ({val}) => {
     const [value, setValue] = React.useState(val);
+    //console.log(val)
     const linking = (e) => {
       let a = document.createElement("a")
       a.setAttribute("href",e)
@@ -30,7 +31,7 @@ const Navigation = ({val}) => {
   return (
       <Paper  sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }} elevation={3}>
         <BottomNavigation
-          showLabels
+          showLabels={false}
           value={value}
           onChange={(event, newValue) => {
             setValue(newValue);

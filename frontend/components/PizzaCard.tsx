@@ -1,3 +1,4 @@
+/* eslint-disable */
 import * as React from 'react';
 import { styled } from '@mui/material/styles';import Card from '@mui/material/Card';
 import CardActions from '@mui/material/CardActions';
@@ -67,7 +68,7 @@ import Select, { SelectChangeEvent } from '@mui/material/Select';
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
 }
-export default function PizzaCard({title,desc,imageurl,prices,extra},props) {
+export default function PizzaCard({title,desc,imageurl,prices,extra,health},props) {
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -173,7 +174,53 @@ const handleChange = (event: SelectChangeEvent) => {
     ))
   }
           </Select>
+          <div style={{textAlign:'center',margin:'9px'}}>Additional health information:-</div>
+          
+          {
+        health?.map(val=>(
+          <table>
+          <tr>
+          <td style={{textAlign:'center'}}>Calories:</td>
+          <td>{val.calories || "None"}</td>
+          </tr>
+          <tr>
+          <td style={{textAlign:'center'}}>Energy:</td>
+          <td>{val.energy || "None"}</td>
+          </tr>
+          <tr>
+          <td style={{textAlign:'center'}}>Fat:</td>
+          <td>{val.fat || "None"}</td>
+          </tr>    
+          <tr>
+          <td style={{textAlign:'center'}}>Protin:</td>
+          <td>{val.protin|| "None"}</td>
+          </tr>
+          <tr>
+          <td style={{textAlign:'center'}}>Carbohydrates:</td>
+          <td>{val.carbohydrates || "None"}</td>
+          </tr>    
+          <tr>
+          <td style={{textAlign:'center'}}>Sugars:</td>
+          <td>{val.sugars || "No data"}</td>
+          </tr>     
+          <tr>
+          <td style={{textAlign:'center'}}>dietryfibre:</td>
+          <td>{val.dietryfibre}</td>
+          </tr>  
+          <tr>
+          <td style={{textAlign:'center'}}>Sodium:</td>
+          <td>{val.sodium || "No data"}</td>
+          </tr>  
+          <tr>
+          <td style={{textAlign:'center'}}>Precautions:</td>
+          <td>{val.precautions || "No data"}</td>
+          </tr>  
+          </table> 
+        ))
+      }
+      
       </FormControl>
+
     </Box>
         </CardContent>
       </Collapse>

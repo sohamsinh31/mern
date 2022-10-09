@@ -26,7 +26,8 @@ const ProocuctSchema = new mongoose.Schema({
     },
     extraOptions:{
         type:[{text:{type:String,required:true},price:{type:Number,required:true}}]
-    }
+    },
+    health:{type:Array}
 },{timestamps:true});
 
 export default mongoose.models.Product || mongoose.model("Product",ProocuctSchema);
