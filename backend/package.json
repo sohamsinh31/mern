@@ -1,0 +1,17 @@
+{
+  "name": "mern-backend",
+  "version": "1.0.0",
+  "description": "from sohamsinh",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon index.js"
+  },
+  "author": "Borasia sohamsinh jitendrasinh",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "mongoose": "^6.6.5",
+    "nodemon": "^2.0.20"
+  }
+}
