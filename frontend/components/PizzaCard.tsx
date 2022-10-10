@@ -6,8 +6,6 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import { Modal,Box,Grid,Paper} from '@mui/material';
 import {
@@ -63,12 +61,13 @@ import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Like from './Like'
 
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
 }
-export default function PizzaCard({title,desc,imageurl,prices,extra,health},props) {
+export default function PizzaCard({title,desc,imageurl,prices,extra,id,health,userid},props) {
 
   const Item = styled(Paper)(({ theme }) => ({
     backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -95,8 +94,8 @@ export default function PizzaCard({title,desc,imageurl,prices,extra,health},prop
   };
 
 
-  const [like, setlike] = React.useState(true)
-  const [open, setOpen] = React.useState(false);
+const [like, setlike] = React.useState(true)
+const [open, setOpen] = React.useState(false);
 const handleOpen = () => setOpen(true);
 const handleClose = () => setOpen(false);
 const [expanded, setExpanded] = React.useState(false);
@@ -125,6 +124,8 @@ const handleChange = (event: SelectChangeEvent) => {
   setAge(event.target.value as string);
 };
 
+
+
   return (
     <div>
     <Card sx={{maxWidth: 420,borderRadius:'16px',margin:'7px'}}>
@@ -144,8 +145,8 @@ const handleChange = (event: SelectChangeEvent) => {
         
       </CardContent>
       <CardActions>
-        {like?(<FavoriteIcon style={{color:'red'}}/>):(<FavoriteBorderIcon/>)}
-        <ShareIcon onClick={handleOpen}/>
+      <Like user={userid} food={id}/>        
+      <ShareIcon onClick={handleOpen}/>
         <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}

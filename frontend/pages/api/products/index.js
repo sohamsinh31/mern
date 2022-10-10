@@ -12,7 +12,6 @@ export default async function handler(req, res) {
             res.status(500).json(err);
         }
     }
-    }
     if(req.method=='GET'){
         try{
             //console.log(req.body.hid)
@@ -39,3 +38,4 @@ export default async function handler(req, res) {
         }
     }
   }
+}

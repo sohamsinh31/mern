@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require('mongoose');
 
 const ProocuctSchema = new mongoose.Schema({
     title:{
@@ -30,4 +30,4 @@ const ProocuctSchema = new mongoose.Schema({
     health:{type:Array}
 },{timestamps:true});
 
-export default mongoose.models.Product || mongoose.model("Product",ProocuctSchema);
+module.exports =  mongoose.models.Product || mongoose.model("Product",ProocuctSchema);

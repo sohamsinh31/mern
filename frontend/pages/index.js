@@ -12,8 +12,8 @@ import Skeleton from '@mui/material/Skeleton';
 import axios from 'axios'
 import Hotel from '../components/Hotel'
 import {signIn,signOut,useSession,getSession} from 'next-auth/react'
-import Geocode from "react-geocode";
-import { usePosition } from 'use-position';
+// import Geocode from "react-geocode";
+// import { usePosition } from 'use-position';
 
 export default  function Home() {
 
@@ -28,9 +28,9 @@ export default  function Home() {
 //LOCATION CODE STARTS FROM HERE
 
 
-const {latitude, longitude, error} = usePosition();
-const [District, setDistrict] = useState(null);
-const [States, setStates] = useState(null);
+// const {latitude, longitude, error} = usePosition();
+// const [District, setDistrict] = useState(null);
+// const [States, setStates] = useState(null);
 
 // Geocode.setApiKey("AIzaSyDltbQeEmA4QmkYNQckWOIsCNguEbyacZk"); ///here put api key 
 // Geocode.setLanguage("en");
@@ -79,7 +79,7 @@ const [States, setStates] = useState(null);
   const [load, setload] = useState(false)
   async function getUser() {
     try {
-      const response = await axios.get('/api/hotels');
+      const response = await axios.get('http://localhost:5000/hotel');
       //console.log(response.data);
       setdata(response.data)
       setload(false);
@@ -90,6 +90,7 @@ const [States, setStates] = useState(null);
   useEffect(() => {
     getUser()
   }, [])
+  //console.log(session.user.id)
   if(status!=="authenticated"){ 
     return(
       <div style={{
