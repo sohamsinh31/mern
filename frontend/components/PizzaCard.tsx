@@ -53,29 +53,24 @@ import {
   WhatsappIcon,
   WorkplaceIcon
 } from "react-share";
+import LocalMallIcon from '@mui/icons-material/LocalMall';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
 import { Dialog, DialogContent, Theme } from "@mui/material";
 import Collapse from '@mui/material/Collapse';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
 import Like from './Like'
 
 
 interface ExpandMoreProps extends IconButtonProps {
   expand: boolean;
 }
-export default function PizzaCard({title,desc,imageurl,prices,extra,id,health,userid},props) {
+export default function PizzaCard({title,desc,imageurl,extra,id,health,userid},props) {
 
-  const Item = styled(Paper)(({ theme }) => ({
-    backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-    ...theme.typography.body2,
-    padding: theme.spacing(1),
-    textAlign: 'center',
-    color: theme.palette.text.secondary,
-  }));
   const style = {
     position: 'fixed',
     bottom:'-15%',
@@ -99,9 +94,12 @@ const [open, setOpen] = React.useState(false);
 const handleOpen = () => setOpen(true);
 const handleClose = () => setOpen(false);
 const [expanded, setExpanded] = React.useState(false);
-const [age, setAge] = React.useState('');
+const [opt, setOpt] = React.useState('0');
 
-//console.log(extra)
+React.useEffect(()=>{
+  //console.log(extra[0]._id)
+}),[]
+
 
 
 const ExpandMore = styled((props: ExpandMoreProps) => {
@@ -119,12 +117,6 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
 const handleExpandClick = () => {
   setExpanded(!expanded);
 };
-
-const handleChange = (event: SelectChangeEvent) => {
-  setAge(event.target.value as string);
-};
-
-
 
   return (
     <div>
@@ -164,14 +156,14 @@ const handleChange = (event: SelectChangeEvent) => {
         <Select
           labelId="demo-simple-select-label"
           id="demo-simple-select"
-          value={age}
+          value={opt}
           label="Options"
-          onChange={handleChange}
+          onChange={(e)=>setOpt(e.target.value as string)} 
         >
         {
           
-        extra.map(val=>(
-          <MenuItem value={val.price}>{val.text}={val.price}₹</MenuItem>
+        extra.map((val,inn)=>(
+          <MenuItem value={inn}>{val.text}={val.price}₹</MenuItem>
     ))
   }
           </Select>
@@ -219,7 +211,9 @@ const handleChange = (event: SelectChangeEvent) => {
           </table> 
         ))
       }
-      
+<div style={{justifyContent:'space-beetween'}}>
+<button style={{backgroundColor:'transparent',color:'aqua',width:'50%',height:'30px',border:'aqua solid 1px',textAlign:'center',fontSize:'15px',fontWeight:'bold',borderRadius:'14px'}} type='button'><ShoppingCartIcon /> Add to cart</button><button style={{backgroundColor:'blue',color:'white',width:'50%',height:'30px',border:'aqua solid 1px',textAlign:'center',fontSize:'15px',fontWeight:'bold',borderRadius:'14px'}} type='submit'><LocalMallIcon/>Order</button>
+</div>
       </FormControl>
 
     </Box>

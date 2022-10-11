@@ -20,10 +20,6 @@ const ProocuctSchema = new mongoose.Schema({
         type:String,
         reqired:true,
     },
-    prices:{
-        type:[Number],
-        required:true
-    },
     extraOptions:{
         type:[{text:{type:String,required:true},price:{type:Number,required:true}}]
     },

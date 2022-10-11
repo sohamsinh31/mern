@@ -24,7 +24,6 @@ const [len,setLen] = useState(0);
 const getData = async () => {
   try {
     const response = await axios.get('http://localhost:5000/like/get',{params:{user:session?.user?.id}});
-
     response.data.map(async val=> {
     const responsee = await axios.get('http://localhost:5000/product/fetch',{params:{hid:val.foodId}})
     //console.log(response.data);
@@ -43,19 +42,18 @@ let data2 = []
     try {
       const response = await axios.get('http://localhost:5000/product',{params:{hid:pid.go}})
       //console.log(response.data);
-      setDataa(response.data)
+      setdata(response.data)
     } catch (error) {
       console.error(error);
     }
   }
 
-useEffect(() => {
-  getUser()
+  useEffect(()=>{
+    getUser()
+  }),[]
+
+
   getData()
-}, [])
-
-
-
 
 
 //console.log(dataa)
@@ -74,7 +72,7 @@ if(pid.go=='favorites'){
     <div style={{marginBottom:'56px'}}>
           {
             dataa.length>0?dataa.map(val=>(
-              <PizzaCard key={val._id} id={val._id} title={val.title} desc={val.desc} imageurl={val.img} prices={val.prices} extra={val.extraOptions} userid={session?.user?.id} health={val.health}/>
+              <PizzaCard key={val._id} id={val._id} title={val.title} desc={val.desc} imageurl={val.img} extra={val.extraOptions} userid={session?.user?.id} health={val.health}/>
           )):(<p>hii</p>)
           }
       </div>
