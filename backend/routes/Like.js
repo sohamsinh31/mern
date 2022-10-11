@@ -21,7 +21,7 @@ route.post('/',(req,res)=>{
 
 route.get('/get',async (req,res)=>{
     try{
-        //console.log(req.query.user)
+        //console.log(req.query.user,"hii")
         const products = await LikeModel.find({userId:req.query.user});
         res.status(200).json(products)
         //console.log(products.length)
