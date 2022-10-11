@@ -117,7 +117,7 @@ export default  function Home() {
   ):(
     <div>
       {data.length>0?data.map(val=>(
-        <Hotel imageurl={val.imageurl} title={val.title} id={val._id}/>
+        <Hotel key={val._id} imageurl={val.imageurl} title={val.title} id={val._id}/>
       )):(<></>)}
       
         </div>
