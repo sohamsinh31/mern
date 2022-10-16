@@ -41,6 +41,7 @@ module.exports={
          * port of dev server
         */
         port: "9500",
+        historyApiFallback: true,
         
         /** "static" 
          * This property tells Webpack what static file it should serve
@@ -67,8 +68,9 @@ module.exports={
          * resolve the one with the extension listed first in the array and skip the rest. 
          * This is what enables users to leave off the extension when importing
          */
-        extensions: ['.js','.jsx','.json','.css'] 
+        extensions: ['.js','.jsx','.json','.css','ts','tsx'] 
     },
+    devtool: 'source-map',
     module:{
         /** "rules"
          * This says - "Hey webpack compiler, when you come across a path that resolves to a '.js or .jsx' 
@@ -76,11 +78,26 @@ module.exports={
          * add it to the bundle. And in this process, kindly make sure to exclude node_modules folder from 
          * being searched"
          */
+        
         rules: [
             {
-                test: /\.(js|jsx|ts|tsx|css)$/,    //kind of file extension this rule should look for and apply in test
+                test: /\.(js|jsx|ts|tsx)$/,    //kind of file extension this rule should look for and apply in test
                 exclude: /node_modules/, //folder to be excluded
                 use:  'babel-loader' //loader which we are going to use
+            }, {
+                test: /\.css$/,
+                loader: "css-loader"
+              }, {
+                test: /\.(jpe?g|png|gif|woff|woff2|eot|ttf|svg)(\?[a-z0-9=.]+)?$/,
+                use: [
+                    {
+                loader: 'url-loader',
+                options: {
+                    limit: 1000,
+                    name : 'assets/img/[name].[ext]'
+                }
+            }
+                ]
             }
         ]
     }

@@ -25,7 +25,7 @@ route.post('/',(req,res)=>{
 
 route.get('/',async (req,res)=>{
     try{
-        //console.log(req.query.hid,"hii")
+        //console.log(req.query.hid)
         const products = await ProductModel.find({hotelid:req.query.hid});
         res.status(200).json(products)
     }catch(err){
