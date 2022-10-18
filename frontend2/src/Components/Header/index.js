@@ -17,6 +17,8 @@ import NotificationsIcon from '@mui/icons-material/Notifications';
 import MoreIcon from '@mui/icons-material/MoreVert';
 import { Avatar,Paper } from '@mui/material';
 import styles from './Header.module.css';
+import { auth } from '../../../Firebase';
+import logo from '../../Assets/logo1.png'
 
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
@@ -152,9 +154,9 @@ export default function Header({userimage,username}) {
           aria-haspopup="true"
           color="inherit"
         >
-          <Avatar alt='hotel' src={userimage} />
+          <Avatar alt='hotel' src={auth?.currentUser?.photoURL} />
         </IconButton>
-        <p>{username || "User"}</p>
+        <p>{auth?.currentUser?.displayName || "User"}</p>
       </MenuItem>
     </Menu>
   );
@@ -163,7 +165,7 @@ export default function Header({userimage,username}) {
     <Box sx={{ flexGrow: 1,backgroundColor:'transpernt' }}>
       <AppBar className={styles.header} position="fixed">
         <Toolbar className={styles.header}>
-            <Avatar alt='hotel' sx={{ mr: 2 }} src='/static/logo1.png'/>
+            <Avatar alt='hotel' sx={{ mr: 2 }} src={logo}/>
           <Typography
             variant="h6"
             noWrap
@@ -206,7 +208,7 @@ export default function Header({userimage,username}) {
               onClick={handleProfileMenuOpen}
               color="inherit"
             >
-            <Avatar alt='hotel' src={userimage} />
+            <Avatar alt='hotel' src={auth?.currentUser?.photoURL} />
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>

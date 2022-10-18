@@ -9,22 +9,33 @@ import PizzaCard from './Components/PizzaCard';
 import Demo from './Containers/Demo'
 import axios from 'axios';
 import styles from './App.module.css'
+import Food from './Containers/Foods'
+import { onAuthStateChanged, signInWithPopup } from 'firebase/auth';
+import {auth, provider} from '../Firebase'
 
 export default function App() {
 
   const [data,setData] = useState([]);
   const [hotel,setHot] = useState([]);
-  const [isFetching, setFetching] = useState(false);
-  const [isData, setDataa] = useState(false);
+
+  //console.log(auth?.currentUser?.displayName)
+
+  useEffect(() => {
+    onAuthStateChanged(auth,(authUser)=>{
+      if(authUser){
+        console.log(authUser.displayName);
+      }
+      else{
+        signInWithPopup(auth,provider).then(res=>console.log(res.user.displayName)).catch(err=>console.log(err))
+      }
+    })
+  }, [])
+  
 
   function Query() {
     return (
       <div>
-        {
-            data.length>0?data.map(val=>(
-              <PizzaCard key={val._id} id={val._id} title={val.title} desc={val.desc} imageurl={val.img} extra={val.extraOptions} userid={null} health={val.health}/>
-          )):(<p>hii</p>)
-          }
+Page not found..
       </div>
     );
   }
@@ -41,11 +52,7 @@ export default function App() {
 
   async function getUser() {
     try {
-      //const response = await axios.get('http://localhost:5000/product',{params:{hid:pid}})
-      //console.log(response.data);
-      //setData(response.data)
       await fetch(`http://localhost:5000/product?hid=${pid}`).then(res=>res.json()).then(data=>setData(data))
-
     } catch (error) {
       console.error(error);
     }
@@ -87,8 +94,9 @@ export default function App() {
         </div>
       </Route>
       <Route path='*'>
-        {isFetching?(<div>Data is loading..</div>):(<Query/>)}
-        
+        {
+          data.length>0?(<Food data={data}/>):(<Query/>)
+        }
       </Route>
     </Switch>
     </Router>

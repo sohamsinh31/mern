@@ -66,6 +66,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Like from '../Like'
 import pizza from '../../Assets/pizza2.jpg'
+import { auth } from '../../../Firebase';
 
 
 export default function PizzaCard({title,desc,imageurl,extra,id,health,userid}) {
@@ -117,7 +118,7 @@ const handleExpandClick = () => {
 
   return (
     <div>
-    <Card sx={{maxWidth: 420,borderRadius:'16px',margin:'7px'}}>
+    <Card sx={{borderRadius:'16px',margin:'7px'}}>
       <CardMedia
         component="img"
         alt="green iguana"
@@ -134,7 +135,7 @@ const handleExpandClick = () => {
         
       </CardContent>
       <CardActions>
-      <Like user={userid} food={id}/>        
+      <Like user={auth?.currentUser?.displayName} food={id}/>        
       <ShareIcon onClick={handleOpen}/>
         <ExpandMore
           expand={expanded}
