@@ -13,22 +13,21 @@ const useStyles = makeStyles({
 export default function App({data}) {
   const classes = useStyles();
   return (
-    <Grid
-      container
-      spacing={4}
-      className={classes.gridContainer}
-      justifyContent="center"
-    >
+    // <Grid
+    //   container
+    //   spacing={4}
+    //   className={classes.gridContainer}
+    // >
       
-      <div>
+      <div style={{width:'fit-content',display:'grid'}}>
         {
             data.map(val=>(
-            <Grid item xs={12} sm={6} md={4}>
+            // <Grid item xs={3} sm={6} md={4}>
               <PizzaCard key={val._id} id={val._id} title={val.title} desc={val.desc} imageurl={val.img} extra={val.extraOptions} userid={null} health={val.health}/>
-              </Grid>
+              // </Grid>
           ))
           }
       </div>
-    </Grid>
+    // </Grid>
   );
 }

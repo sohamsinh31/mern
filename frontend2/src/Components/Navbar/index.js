@@ -26,7 +26,7 @@ const Navigation = ({val}) => {
           }}
         >
          <BottomNavigationAction onClick={()=>linking('/')} label="Hotels" icon={<LocationCityIcon />} />
-          <BottomNavigationAction onClick={()=>linking('/favorites')} label="Favorites" icon={<FavoriteIcon />} />
+          <BottomNavigationAction onClick={()=>linking('/Favourites')} label="Favorites" icon={<FavoriteIcon />} />
           <BottomNavigationAction onClick={()=>linking('/orders')}  label="Orders" icon={<LocalMallIcon />} />
         </BottomNavigation>
       </Paper>

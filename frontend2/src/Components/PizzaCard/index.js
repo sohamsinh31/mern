@@ -56,7 +56,6 @@ import {
 } from "react-share";
 import LocalMallIcon from '@mui/icons-material/LocalMall';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
-import { Dialog, DialogContent, Theme } from "@mui/material";
 import Collapse from '@mui/material/Collapse';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
@@ -100,7 +99,6 @@ export default function PizzaCard({title,desc,imageurl,extra,id,health,userid}) 
   };
 
 
-const [like, setlike] = React.useState(true)
 const [open, setOpen] = React.useState(false);
 const handleOpen = () => setOpen(true);
 const handleClose = () => setOpen(false);
@@ -118,12 +116,12 @@ const handleExpandClick = () => {
 
   return (
     <div>
-    <Card sx={{borderRadius:'16px',margin:'7px'}}>
+    <Card sx={{borderRadius:'16px',width:'fit-content',margin:'7px',minWidth:'360px'}}>
       <CardMedia
         component="img"
         alt="green iguana"
         height=""
-        image={pizza}
+        image={imageurl}
       />
       <CardContent>
         <Typography gutterBottom variant="h5" component="div">
@@ -135,9 +133,9 @@ const handleExpandClick = () => {
         
       </CardContent>
       <CardActions>
-      <Like user={auth?.currentUser?.displayName} food={id}/>        
+      <Like user={auth?.currentUser?.uid} food={id}/>        
       <ShareIcon onClick={handleOpen}/>
-        <ExpandMore
+      <ExpandMore
           expand={expanded}
           onClick={handleExpandClick}
           aria-expanded={expanded}
@@ -147,6 +145,7 @@ const handleExpandClick = () => {
         </ExpandMore>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
+      
         <CardContent>
         <Box sx={{ minWidth: 120 }}>
       <FormControl fullWidth>
@@ -216,7 +215,7 @@ const handleExpandClick = () => {
 
     </Box>
         </CardContent>
-      </Collapse>
+        </Collapse>
     </Card>
     <Modal
                 open={open}

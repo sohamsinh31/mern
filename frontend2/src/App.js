@@ -1,3 +1,4 @@
+/*eslint-disable*/
 import React, { useState , useEffect } from 'react'
 import Header from './Components/Header';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
@@ -5,13 +6,12 @@ import CssBaseline from '@mui/material/CssBaseline';
 import Navbar from './Components/Navbar'
 import Hotel from './Containers/Hotel/Hotel'
 import { BrowserRouter as Router,Switch, Route } from "react-router-dom";
-import PizzaCard from './Components/PizzaCard';
-import Demo from './Containers/Demo'
 import axios from 'axios';
 import styles from './App.module.css'
 import Food from './Containers/Foods'
 import { onAuthStateChanged, signInWithPopup } from 'firebase/auth';
 import {auth, provider} from '../Firebase'
+import Favourites from './Containers/Favourites/Favourite';
 
 export default function App() {
 
@@ -91,17 +91,22 @@ Page not found..
       {hotel.length>0?hotel.map(val=>(
         <Hotel key={val._id} imageurl={val.imageurl} title={val.title} id={val._id}/>
       )):(<></>)}
+          <Navbar val={0}/>
         </div>
+      </Route>
+      <Route exact path='/Favourites'>
+        <Favourites userid={auth?.currentUser?.uid}/>
+        <Navbar val={1}/>
       </Route>
       <Route path='*'>
         {
-          data.length>0?(<Food data={data}/>):(<Query/>)
+          data.length>0?(<div><Food data={data}/><Navbar val={0}/>
+          </div>):(<Query/>)
         }
       </Route>
     </Switch>
     </Router>
     </div>
-    <Navbar val={0}/>
     </ThemeProvider>
   );
 }
