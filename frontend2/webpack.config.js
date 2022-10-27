@@ -1,10 +1,17 @@
 const path = require("path");
+const webpack = require('webpack');
+const detenv = require('dotenv-webpack')
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+const DotenvWebpackPlugin = require("dotenv-webpack");
 var HTMLWebpackPluginConfig = new HtmlWebpackPlugin({
   template:  './public/index.html',
   filename: 'index.html',
   inject: 'body'
 });
+
+var envv =new webpack.DefinePlugin({
+    process: {env: {}}
+  })
 
 /*We are basically telling webpack to take index.js from entry. Then check for all file extensions in resolve. 
 After that apply all the rules in module.rules and produce the output and place it in main.js in the public folder.*/
@@ -16,7 +23,7 @@ module.exports={
      */
     mode: "development", 
 
-    plugins: [HTMLWebpackPluginConfig],
+    plugins: [HTMLWebpackPluginConfig,new detenv()],
     /** "entry"
      * the entry point 
      */

@@ -25,11 +25,6 @@ getData()
   return (
     <div>
     <div style={{marginBottom:'56px'}}>
-          {/* {
-            data.length>0?data.map(val=>(
-              <PizzaCard key={val._id} id={val._id} title={val.title} desc={val.desc} imageurl={val.img} extra={val.extraOptions} userid={userid} health={val.health}/>
-          )):(<p>hii</p>)
-          } */}
           <Food data={data}/>
       </div>
     </div>

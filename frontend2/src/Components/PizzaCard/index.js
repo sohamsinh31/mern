@@ -108,6 +108,7 @@ const [opt, setOpt] = React.useState('0');
 React.useEffect(()=>{
   //console.log(extra[0]._id)
 }),[]
+//console.log(extra[opt]._id)
 
 
 const handleExpandClick = () => {

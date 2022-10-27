@@ -7,19 +7,33 @@ import Navbar from './Components/Navbar'
 import Hotel from './Containers/Hotel/Hotel'
 import { BrowserRouter as Router,Switch, Route } from "react-router-dom";
 import axios from 'axios';
-import styles from './App.module.css'
 import Food from './Containers/Foods'
 import { onAuthStateChanged, signInWithPopup } from 'firebase/auth';
 import {auth, provider} from '../Firebase'
 import Favourites from './Containers/Favourites/Favourite';
+import User from './Containers/User';
 
 export default function App() {
 
   const [data,setData] = useState([]);
   const [hotel,setHot] = useState([]);
+  const [city,setCity] = useState('');
+  const [lat, setLat] = useState([]);
+  const [long, setLong] = useState([]);
 
-  //console.log(auth?.currentUser?.displayName)
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      setLat(position.coords.latitude);
+      setLong(position.coords.longitude);
+    });
 
+    console.log("Latitude is:", lat)
+    console.log("Longitude is:", long)
+  }, [lat, long]);
+
+  const getLocation = async () => {
+   await fetch(`http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${long}&limit=5&appid=${process.env.REACT_APP_OPENAPI}`).then(resp=>resp.json()).then(data=>setCity(data[0].name))
+  }
   useEffect(() => {
     onAuthStateChanged(auth,(authUser)=>{
       if(authUser){
@@ -31,7 +45,6 @@ export default function App() {
     })
   }, [])
   
-
   function Query() {
     return (
       <div>
@@ -58,9 +71,9 @@ Page not found..
     }
   }
 
-
   useEffect(()=>{
     getUser()
+    //console.log(city)
    }),[]
 
   async function getHotel() {
@@ -74,8 +87,9 @@ Page not found..
   }
   useEffect(() => {
     getHotel()
+    //getLocation()
   }, [])
-
+//console.log(city)
   //console.log(pid)
   //console.log(data)
 
@@ -96,6 +110,10 @@ Page not found..
       </Route>
       <Route exact path='/Favourites'>
         <Favourites userid={auth?.currentUser?.uid}/>
+        <Navbar val={1}/>
+      </Route>
+      <Route exact path='/User'>
+        <User/>
         <Navbar val={1}/>
       </Route>
       <Route path='*'>
