@@ -9,9 +9,10 @@ import { BrowserRouter as Router,Switch, Route } from "react-router-dom";
 import axios from 'axios';
 import Food from './Containers/Foods'
 import { onAuthStateChanged, signInWithPopup } from 'firebase/auth';
-import {auth, provider} from '../Firebase'
+import {auth, provider,messaging} from '../Firebase'
 import Favourites from './Containers/Favourites/Favourite';
 import User from './Containers/User';
+import { getToken } from 'firebase/messaging';
 
 export default function App() {
 
@@ -21,15 +22,30 @@ export default function App() {
   const [lat, setLat] = useState([]);
   const [long, setLong] = useState([]);
 
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      setLat(position.coords.latitude);
-      setLong(position.coords.longitude);
-    });
+  // useEffect(() => {
+  //   navigator.geolocation.getCurrentPosition(function(position) {
+  //     setLat(position.coords.latitude);
+  //     setLong(position.coords.longitude);
+  //   });
 
-    console.log("Latitude is:", lat)
-    console.log("Longitude is:", long)
-  }, [lat, long]);
+  //   console.log("Latitude is:", lat)
+  //   console.log("Longitude is:", long)
+  // }, [lat, long]);
+
+  Notification.requestPermission()
+  //messaging.request
+
+// getToken(messaging,{vapidKey:'AAAA_cHsQOM:APA91bHM6lcva1V7yiBnRo_splhkaM74hNg_X19_eIUrOqz6rkk6YBcq_sFp-_bSxQz4cCmplweP01_IY1U9J-rmgGUm9qF6uAMuFC5URz82nryZw8v1xLUB8VCdTh_GDsGV31d0dQKq'}).then((currentToken)=>{
+//   if (currentToken) {
+//     console.log(currentToken)
+//     // Send the token to your server and update the UI if necessary
+//     // ...
+//   } else {
+//     // Show permission request UI
+//     console.log('No registration token available. Request permission to generate one.');
+//     // ...
+//   }
+// }).catch((err)=>console.log(err))
 
   const getLocation = async () => {
    await fetch(`http://api.openweathermap.org/geo/1.0/reverse?lat=${lat}&lon=${long}&limit=5&appid=${process.env.REACT_APP_OPENAPI}`).then(resp=>resp.json()).then(data=>setCity(data[0].name))
@@ -37,7 +53,7 @@ export default function App() {
   useEffect(() => {
     onAuthStateChanged(auth,(authUser)=>{
       if(authUser){
-        console.log(authUser.displayName);
+        //console.log(authUser.displayName);
       }
       else{
         signInWithPopup(auth,provider).then(res=>console.log(res.user.displayName)).catch(err=>console.log(err))
@@ -114,7 +130,7 @@ Page not found..
       </Route>
       <Route exact path='/User'>
         <User/>
-        <Navbar val={1}/>
+        <Navbar val={0}/>
       </Route>
       <Route path='*'>
         {

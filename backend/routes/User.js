@@ -5,8 +5,9 @@ const UserModel = require('../models/User')
 const route = Express.Router()
 
 route.get('/',async (req,res)=>{
-    console.log(req.body.uid)
-    const all = await UserModel.find({uid:req.body.uid})
+    console.log(req.query.uid)
+    const all = await UserModel.find({uid:req.query.uid})
+    //console.log(all)
     res.status(200).json(all)
 })
 

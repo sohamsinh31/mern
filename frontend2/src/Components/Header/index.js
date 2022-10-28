@@ -104,8 +104,8 @@ export default function Header({userimage,username}) {
       open={isMenuOpen}
       onClose={handleMenuClose}
     >
+      <a style={{color:'inherit'}} href='/User'><MenuItem onClick={handleMenuClose}>My account</MenuItem></a>
       <MenuItem onClick={handleMenuClose}>Profile</MenuItem>
-      <MenuItem onClick={handleMenuClose}>My account</MenuItem>
     </Menu>
   );
 
@@ -154,7 +154,7 @@ export default function Header({userimage,username}) {
           aria-haspopup="true"
           color="inherit"
         >
-          <Avatar alt='hotel' src={auth?.currentUser?.photoURL} />
+        <Avatar alt='hotel' src={auth?.currentUser?.photoURL} />
         </IconButton>
         <p>{auth?.currentUser?.displayName || "User"}</p>
       </MenuItem>

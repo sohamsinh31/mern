@@ -6,6 +6,7 @@ import { getDatabase } from "firebase/database";
 import { getStorage } from "firebase/storage";
 import {getFirestore} from "firebase/firestore"; 
 import  "firebase/analytics";
+import { getMessaging,onMessage } from "firebase/messaging";
 import {GoogleAuthProvider,getRedirectResult, signInWithPopup,signInWithRedirect, getAuth,signOut, onAuthStateChanged , createUserWithEmailAndPassword,updateProfile, signInWithEmailAndPassword,deleteUser  } from "firebase/auth";
 
 const firebaseConfig = {
@@ -15,7 +16,7 @@ const firebaseConfig = {
   storageBucket: "foodapp-6663a.appspot.com",
   messagingSenderId: "1089880211683",
   appId: "1:1089880211683:web:6c25149935b61162f645d6",
-  measurementId: "G-QS12CPD4JL"
+  measurementId: "G-QS12CPD4JL",
 };
 
 // Initialize Firebase
@@ -25,6 +26,8 @@ const storage = getStorage();
 const rdb =  getDatabase();
 const db = getFirestore();
 const auth = getAuth();
+const messaging = getMessaging(app);
 const provider = new GoogleAuthProvider();
 
-export {auth,provider,db,rdb,storage}
+
+export {auth,provider,db,rdb,storage,messaging}
